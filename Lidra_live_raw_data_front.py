@@ -28,3 +28,15 @@ class LidraLiveRawDataFront:
         self.running = False
         self.socket.close()
         print("Stopped listening for data.")
+    def process_packet(self, packet):
+        header_format = '>HBBI'
+        header_size = struct.calcsize(header_format)
+        if len(packet) < header_size:
+            print("Received packet is too small to contain header.")
+            return
+        header = struct.unpack(header_format, packet[:header_size])
+        packet_type = header[1]
+        if packet_type == 0x01:
+            self.parse_lidar_data(packet[header_size:])
+        else:
+            print(f"Unknown packet type: {packet_type}")
