@@ -24,3 +24,7 @@ class LidraLiveRawDataFront:
                 continue
             except Exception as e:
                 print(f"Error receiving data: {e}")
+    def stop(self):
+        self.running = False
+        self.socket.close()
+        print("Stopped listening for data.")
