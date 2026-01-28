@@ -193,8 +193,7 @@ def main():
         plot.setLabel('bottom', "X (m)")
         plot.setLabel('left', "Y (m)")
         plot.showGrid(x=True, y=True, alpha=0.4)
-        plot.hideAxis('top')
-        plot.hideAxis('right')  
+    
 
         add_circular_fan(plot)
 
